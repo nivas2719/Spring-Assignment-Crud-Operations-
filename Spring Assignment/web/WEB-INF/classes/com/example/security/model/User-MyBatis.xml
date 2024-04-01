@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+
+	<!-- <insert id="Insert" parameterType="map">
+		insert into	apssdc.sample(myname,fathername,mobileno)    
+		values(#{p.myname},#{p.fathername},#{p.mobileno})
+	</insert>   -->  
+
+
+
+    <select id="Insert" parameterType="map" statementType="CALLABLE" >
+    {call apssdc.insert_college(
+      #{p.myname,jdbcType=VARCHAR ,mode=IN},
+        #{p.fathername,jdbcType=VARCHAR ,mode=IN},
+          #{p.mobileno,jdbcType=VARCHAR ,mode=IN}
+          
+    )}
+  </select>
+
+
+
+   
+   <select id="getAll" statementType="CALLABLE" resultType="UserModel">   
+    {call apssdc.get_college()}</select>       
+	  
+	  <!--  <select id="getById" resultType="UserModel">
+		SELECT myname,fathername,mobileno from apssdc.sample WHERE myname = #{myname};
+	  </select>    -->
+	  
+	  
+	   <select id="getById" parameterType="map"  resultType="UserModel" statementType="CALLABLE" >
+    {call apssdc.getbyid_college(
+    
+        
+      #{myname,jdbcType=VARCHAR}
+    
+               
+               
+    )}
+  </select>
+	  
+	  
+
+	<!-- <delete id="deleteData" parameterType="java.lang.String">
+		delete from apssdc.sample where myname = #{name};
+	</delete> -->
+	
+	 <select id="deleteData" parameterType="map" statementType="CALLABLE" >
+    {call apssdc.delete_college(
+      #{p.myname,jdbcType=VARCHAR ,mode=IN}
+     
+          
+    )}
+  </select>
+	
+	<!-- <update id="updateData"  parameterType="map">
+		update apssdc.sample SET fathername=#{p.fathername},mobileno=#{p.mobileno} WHERE myname=#{name};
+	</update> -->
+	
+	
+	  <select id="updateData" parameterType="map" statementType="CALLABLE" >
+    {call apssdc.update_college(
+      #{p.myname,jdbcType=VARCHAR ,mode=IN},
+        #{p.fathername,jdbcType=VARCHAR ,mode=IN},
+          #{p.mobileno,jdbcType=VARCHAR ,mode=IN}
+          
+    )}
+  </select>
+	
+</mapper>	

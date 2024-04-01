@@ -1,0 +1,152 @@
+<!Doctype html>
+<html lang="en">
+<head>
+<title>index page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="/myspring/scripts/common/angular.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/myspring/scripts/general/RegistrationModule.js"></script>
+
+<style>
+.panel {
+	height: 320px;
+}
+
+.panel-heading {
+	text-align: center;
+	font-size: 19px;
+}
+.btn{
+  padding: 2px 4px;
+}
+.table>tbody>tr>td{
+    padding:6px;
+}
+</style>
+</head>
+<body id="regid" data-ng-controller="RegistrationController">
+		<div class="container"><br><br>
+		<div id="viewdiv">
+			<button type="button" id="register"
+							class="btn btn-primary btn-md pull-right" data-toggle="modal"
+							data-target="#myModal">
+							<span class="glyphicon glyphicon-plus"></span>
+						</button>
+			<table class="table table-bordered">
+				<tr style='background-color: ghostwhite'>
+					<th>Name</th>
+					<th>Gender</th>
+					<th>FatherName</th>
+					<th>MobileNo</th>
+					<th>EmailID</th>   
+					<th>Address</th>
+					<th>Edit/Delete</th>
+				</tr>
+				<tr data-ng-repeat="userdata in userdetails">
+					<td>{{userdata.myname}}</td>
+					<td>{{userdata.gender}}</td>
+					<td>{{userdata.fathername}}</td>
+					<td>{{userdata.mobileno}}</td>
+					<td>{{userdata.email}}</td>
+					<td>{{userdata.address}}</td>
+					<td>&nbsp;&nbsp;&nbsp;
+						<button type="button" id="editData" data-ng-click="getById(userdata.myname)"
+							class="btn btn-success btn-md" data-toggle="modal"
+							data-target="#myModal">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button> &nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(userdata.myname)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</table>
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Registration
+								Form</h4>
+						</div>
+						<div class="modal-body">
+							<div class="panel panel-success">
+								<div class="panel-body">
+									<form>
+										<br> <label class="control-label col-md-2">Name:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.myname" data-ng-value=>
+										</div>
+										<label class="control-label col-md-2">Guardian Name:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.fathername">
+										</div>
+										<br> <br> <br> <br> <label
+											class="control-label col-md-2">Mobile Number:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.mobileno">
+										</div>
+										<label class="control-label col-md-2">Email ID:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.email">
+										</div>
+										<br> <br> <br> <br> <label
+											class="control-label col-md-2">Gender:</label>
+										<div class="radio  col-md-4">
+											<select class="selectpicker"
+												data-ng-model="data.object.gender">
+												<option>Male</option>
+												<option>Female</option>
+											</select>
+										</div>
+										<label class="control-label col-md-2">Address</label>
+										<div class="col-md-4">
+											<textarea class="form-control"
+												data-ng-model="data.object.address"></textarea>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="update" class="btn btn-primary"
+								data-ng-click="updateData(data.object)" data-dismiss="modal"
+								style="width: 100px">Update</button>
+							<button type="button" id="add" class="btn btn-primary"
+								data-ng-click="registration(data.object);" data-dismiss="modal"
+								style="width: 100px">Register</button>
+							<button type="button" class="btn btn-warning"
+								style="margin-right: 70px; width: 100px" data-dismiss="modal">Close</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		jQuery(document).ready(function() {
+			$("#update").hide();
+			$("#add").hide();
+			angular.bootstrap(jQuery("#regid"), [ 'RegistrationModule' ]);
+		});
+		jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show();
+		});
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();
+		});
+		
+	</script>
+</body>
+</html>

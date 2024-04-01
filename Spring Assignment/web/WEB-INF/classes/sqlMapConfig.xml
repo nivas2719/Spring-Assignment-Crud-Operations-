@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+    	<typeAlias alias="UserModel" type="com.spring.Model.User" />
+    		<typeAlias alias="RegisterFormModel" type="com.spring.Model.RegisterForm" />
+    	
+      </typeAliases>
+    
+    <mappers>
+       	<mapper resource="com/example/security/model/User-MyBatis.xml" />
+       		<mapper resource="com/example/security/model/RegisterForm-MyBatis.xml" />
+    </mappers>
+    
+</configuration>
